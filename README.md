@@ -21,3 +21,6 @@ public static void main(String[] args) throws Exception {
     <artifactId>fastjson</artifactId>
     <version>1.2.83</version>
 </dependency>
+```
+
+[查询API文档](https://www.volcengine.com/docs/6285/67492#_1-%E6%A6%82%E8%BF%B0)
