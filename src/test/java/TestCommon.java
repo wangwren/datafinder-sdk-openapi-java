@@ -5,32 +5,243 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class TestCommon {
-    public static DSL getEventDSL() {
-        return DSL.builder("event")
-                .appIds(0).rangePeriod("day", 1562688000, 1563206400, false)
-                .rangePeriod("hour", 1562688000, 1563206400, false)
-                .group("app_channel").skipCache(false)
-                .tags(new HashMap<String, Object>() {{
-                    put("contains_today", 0);
-                    put("show_yesterday", 0);
-                    put("series_type", "line");
-                    put("show_map", new HashMap<String, String>());
-                }})
-                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
-                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
-                        .stringExpr("age", "!=", Arrays.asList("20"))
-                        .show("zh_CN, zh_cn; not(20)", "2"))
+    public static DSL getAsaEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
                 .query(Expr.show("A", "A")
-                        .group("app_name")
-                        .event("origin", "predefine_pageview", "pv")
-                        .measureInfo("pct", "event_index", 100)
-                        .andFilter(Expr.stringExpr("os_name", "=", Arrays.asList("windows"))
-                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
-                                .show("referer", "referrer_label"))
-                ).query(Expr.show("B", "B")
-                        .group("app_name")
-                        .event("origin", "page_open", "pv")
-                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                        .group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId"))
+                        .event("origin", "ios_login_scene_HYJQ", "event_users")
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("os_name", "=", Arrays.asList("windows"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                .builder();
+    }
+
+    public static DSL getBindCardEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
+                .query(Expr.show("A", "A")
+//                                .group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId"))
+                                .event("origin", "Bindcard_resp_zxd_server", "event_users")
+                                .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"), "event_param")
+//                                        .show("referer", "referer_label")
+                                        )
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                .builder();
+    }
+
+
+    public static DSL getScreenEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
+                .query(Expr.show("A", "A")
+//                                .group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId"))
+                                .event("origin", "API_screen_result", "event_users")
+                                .andFilter(Expr.stringExpr("partner", "=", Arrays.asList("易借"), "event_param")
+//                                        .show("referer", "referer_label")
+                                )
+                                .andFilter(Expr.stringExpr("result", "=", Arrays.asList("1"), "event_param"))
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                .builder();
+    }
+
+    public static DSL getAccessEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
+                .query(Expr.show("A", "A")
+//                                .group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId"))
+                                .event("origin", "API_library_result", "event_users")
+                                .andFilter(Expr.stringExpr("partner", "=", Arrays.asList("易借"), "event_param")
+//                                        .show("referer", "referer_label")
+                                )
+                                .andFilter(Expr.stringExpr("hitting_response", "=", Arrays.asList("1"), "event_param"))
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                .builder();
+    }
+
+    public static DSL getApplyEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
+                .query(Expr.show("A", "A")
+//                                .group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId"))
+                                .event("origin", "API_oauth_required_harbor", "event_users")
+                                .andFilter(Expr.stringExpr("partner", "=", Arrays.asList("易借"), "event_param")
+//                                        .show("referer", "referer_label")
+                                )
+                                .andFilter(Expr.stringExpr("message", "=", Arrays.asList("{\"result\":1,\"retCode\":\"200\"}"), "event_param"))
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                .builder();
+    }
+
+    public static DSL getOauthCallbackAmountEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
+                .query(Expr.show("A", "A")
+                                .event("origin", "API_oauth_callback", "measure")
+                        .measureInfo("sum", "amount", 0)
+                                .andFilter(Expr.stringExpr("partner", "=", Arrays.asList("易借"), "event_param")
+//                                        .show("referer", "referer_label")
+                                )
+                                .andFilter(Expr.stringExpr("result", "=", Arrays.asList("审核通过"), "event_param"))
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
+                .builder();
+    }
+
+    public static DSL getLoanEventDSL() {
+        return DSL.eventBuilder()
+                .appIds(20001630).rangePeriod("day", 1700496000, 1700582399, false)
+                .page(1000,0).skipCache(false)
+                //.rangePeriod("hour", 1700496000, 1700582400, false)
+                //.group(Arrays.asList("loginScene","adGroupId","campaignId","keywordId")).skipCache(false)
+//                .tags(new HashMap<String, Object>() {{
+//                    put("contains_today", 0);
+//                    put("show_yesterday", 0);
+//                    put("series_type", "line");
+//                    put("show_map", new HashMap<String, String>());
+//                }})
+//                .andProfileFilter(Expr.intExpr("user_is_new", "=", Arrays.asList(0)).show("老用户", "1"))
+//                .andProfileFilter(Expr.stringExpr("language", "=", Arrays.asList("zj_CN", "zh_cn"))
+//                        .stringExpr("age", "!=", Arrays.asList("20"))
+//                        .show("zh_CN, zh_cn; not(20)", "2"))
+                .query(Expr.show("A", "A")
+                                .event("origin", "API_loan_request", "event_users")
+                                .andFilter(Expr.stringExpr("partner", "=", Arrays.asList("通通分期3"), "event_param")
+//                                        .show("referer", "referer_label")
+                                )
+                                .andFilter(Expr.stringExpr("loan_result", "=", Arrays.asList("成功"), "event_param"))
+                        //.measureInfo("pct", "event_index", 100)
+//                        .andFilter(Expr.stringExpr("result_v33_zxd", "=", Arrays.asList("成功"))
+//                                .stringExpr("network_type", "!=", Arrays.asList("wifi"))
+//                                .show("referer", "referrer_label"))
+                )
+//                .query(Expr.show("B", "B")
+//                        .group("app_name")
+//                        .event("origin", "page_open", "pv")
+//                        .andFilter(Expr.emptyExpr().show("app_id", "app_id_label")))
                 .builder();
     }
 

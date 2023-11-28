@@ -41,11 +41,11 @@ public class TestDsl {
         }
     }
 
-    @Test
-    public void testEvent() {
-        dsl = TestCommon.getEventDSL();
-        getResult(dsl);
-    }
+//    @Test
+//    public void testEvent() {
+//        dsl = TestCommon.getEventDSL();
+//        getResult(dsl);
+//    }
 
     @Test
     public void testFunnel() {
